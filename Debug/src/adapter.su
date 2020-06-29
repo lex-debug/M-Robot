@@ -1,0 +1,6 @@
+adapter.c:9:6:Initialize	40	static
+adapter.c:89:6:slave_rcv	16	static
+adapter.c:102:6:PS4_rcv	16	static
+adapter.c:109:6:CAN1_RX0_IRQHandler	8	static
+adapter.c:148:6:CAN2_RX1_IRQHandler	8	static
+adapter.c:189:6:CAN_PROCESS	4	static

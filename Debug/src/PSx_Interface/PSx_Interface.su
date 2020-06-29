@@ -1,0 +1,4 @@
+PSx_Interface.c:24:6:PSxBTReceiveData	24	static
+PSx_Interface.c:39:6:PSx_HandlerUART	64	static
+PSx_Interface.c:64:6:PSx_HandlerI2C	16	static
+PSx_Interface.c:86:6:PSxBTGetXY	24	static

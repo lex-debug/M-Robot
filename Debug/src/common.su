@@ -1,0 +1,4 @@
+common.c:7:6:RNS_config	48	static
+common.c:36:6:manual_mode	16	static
+common.c:65:6:enq	8	static
+common.c:75:6:var_init	16	static
