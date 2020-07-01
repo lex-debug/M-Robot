@@ -151,7 +151,7 @@ void CAN_PROCESS(void);
 void Initialize (void);
 void slave_rcv(unsigned char length, unsigned char *pdata);
 void PS4_rcv(unsigned char length, unsigned char *pdata);
-// void manual_mode (void);
+// void manual_mode (void);	I put inside common.h
 // void enq (void);
 // void var_init (void);
 
