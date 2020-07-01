@@ -31,18 +31,29 @@
 //#define L2				GPIO_ReadInputDataBit(IP6_PIN)
 //#define L1				GPIO_ReadInputDataBit(IP7_PIN)
 
-#define height_high  	SR.cast[1].bit0=1
-#define height_low	 	SR.cast[1].bit0=0
-#define gereje_down		SR.cast[1].bit1=0
-#define gereje_up		SR.cast[1].bit1=1
-#define Wextend_out		SR.cast[1].bit4=1
-#define Wextend_in		SR.cast[1].bit4=0
-#define Bextend_out		SR.cast[1].bit5=1
-#define Bextend_in		SR.cast[1].bit5=0
-#define grab_out 		SR.cast[1].bit6=1
-#define grab_in         SR.cast[1].bit6=0
-#define shoot_out		SR.cast[1].bit7=1
-#define shoot_in		SR.cast[1].bit7=0
+//Limit Switch
+#define LS_l1			IP						// declare after electronic phase
+#define LS_l2			IP
+#define LS_r1			IP
+#define LS_r2			IP
+#define LS_f1			IP
+#define LS_f2			IP
+#define LS_b1			IP
+#define LS_b2			IP
+#define LS_shagai		IP
+
+// #define height_high  	SR.cast[1].bit0=1
+// #define height_low	 	SR.cast[1].bit0=0
+// #define gereje_down		SR.cast[1].bit1=0
+// #define gereje_up		SR.cast[1].bit1=1
+// #define Wextend_out		SR.cast[1].bit4=1
+// #define Wextend_in		SR.cast[1].bit4=0
+// #define Bextend_out		SR.cast[1].bit5=1
+// #define Bextend_in		SR.cast[1].bit5=0
+// #define grab_out 		SR.cast[1].bit6=1
+// #define grab_in         	SR.cast[1].bit6=0
+// #define shoot_out		SR.cast[1].bit7=1
+// #define shoot_in		SR.cast[1].bit7=0
 
 #define InnerMotor(a)	WriteBDC(&BDC1,-a)
 #define OuterMotor(a)	WriteBDC(&BDC2,-a)
@@ -55,6 +66,12 @@
 #define IP20	GPIO_ReadInputDataBit(IP20_Analog7_PIN)
 #define IP21	GPIO_ReadInputDataBit(IP21_Analog8_PIN)
 
+//Analog Sensor
+#define ANA_receive 		IP
+#define ANA_l 			IP
+#define ANA_r 			IP
+#define ANA_f 			IP
+#define ANA_b 			IP
 
 #define Mux1		 MUX.mux_data.bit0
 #define Mux2		 MUX.mux_data.bit1
@@ -94,12 +111,49 @@ typedef union{
 	};
 }sys_t;
 
+typedef union{
+	uint16_t flags;
+	struct{
+		unsigned flag1		:1;
+		unsigned flag2 		:1;
+		unsigned flag3		:1;
+		unsigned flag4		:1;
+		unsigned flag5		:1;
+		unsigned flag6		:1;
+		unsigned flag7 		:1;
+		unsigned flag8		:1;
+		unsigned flag9		:1;
+		unsigned flag10		:1;
+		unsigned flag11		:1;
+		unsigned flag12		:1;
+		unsigned flag13		:1;
+		unsigned flag14		:1;
+		unsigned flag15		:1;
+		unsigned flag16		:1;
+	};
+}pp_f;
+
+typedef struct{
+	int32_t angle;
+	int32_t pulse;
+	int32_t delta_angle;
+}pwenc_t;
+
 sys_t sys;
-
-
+pp_f ppflag;
+pwenc_t pwenc;
 
 #define PS4Request(a)	I2CMasterReadII(a, 0x44, 10)
 
 void RNS_config(CAN_TypeDef* CANx);
+void manual_mode(void)；
+void enq (void)；
+void var_init (void)；
+void autoTask(void);
+int32_t pwAngleRead(QEI_TypeDef QEIx);
+void no_shagai(int32_t angle, BDC_t* bdc, int32_t pwm);
+void take_shagai(int32_t angle, BDC_t* bdc, int32_t pwm);
+void got_shagai(int32_t angle, BDC_t* bdc, int32_t pwm);
+
 
 #endif /* COMMON_H_ */
