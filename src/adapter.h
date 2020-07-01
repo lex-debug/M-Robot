@@ -121,7 +121,7 @@ PID_t Pid;
 float v1, v2, v3, v4, wa, xr, yr;                 //MODN variables
 float xpos, ypos, z;                              //Encoder Values
 int flag;
-int manual;
+int manual, autoflag;
 int counter;                                      //global timer variable
 float speed;                                      //for manual control
 int jun;
