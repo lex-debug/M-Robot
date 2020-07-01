@@ -72,6 +72,104 @@ void enq (void){
 	z = rns.enq.enq_buffer[0].data;
 }
 
+void autoTask(void){
+
+	ppflag.flags = 0x0000;
+
+	float point1[2][5]={
+			{5.0, 0.0, 0.0, 0.0, 0.0},
+			{5.0, x, y, 0.0, 0.0}					//those points need to measure using robot, for now just leave it there
+	};
+	float point2[2][5]={
+			{2.5, x, y, 0.0, 0.0},
+			{2.5, x1, y1, 0.0, 0.0}
+	};
+	float point3[2][5]={
+			{3.0, x1, y1, 0.0, 0.0},
+			{3.0, x2, y2, 0.0, 0.0}
+	};
+	float point4[2][5]={
+			{5.0, x2, y2, 0.0, 0.0},
+			{5.0, x3, y3, 0.0, 0.0},
+	};
+	float point5[3][5]={
+			{5.0, x3, y3, 0.0, 0.0},
+			{5.0, x4, y4, 0.0, 0.0},
+			{5.0, x5, y5, 0.0, 0.0}
+	};
+
+	if(!ANA_receive && ppflag.flag1==0){
+		jun = 1;
+		ppflag.flag1 = 1;
+	}else if(ppflag.flag2==1){
+		jun = 3;
+		ppflag.flag3 = 1;
+	}else{
+		jun = 2;
+		ppflag.flag2 = 1;
+	}
+
+	if(IP18 && ppflag.flag3==1){
+		jun = 4;
+		ppflag.flag4 = 1;
+	}
+
+	if(LS_l1 && LS_l2 && ppflag.flag4==1){
+		jun = 5;
+		ppflag.flag5 = 1;
+	}
+
+	switch(jun){
+		case 1 :	RNSPPstart(point1, 2, &rns);
+					break;
+		case 2 :	RNSPPstart(point2, 2, &rns);
+					break;
+		case 3 :	RNSPPstart(point3, 2, &rns);
+					break;
+		case 4 :	RNSPPstart(point4, 2, &rns);
+					break;
+		case 5 :	RNSPPstart(point5, 3, &rns);
+					break;
+		default :	break;
+	}
+
+}
+
+int32_t pwAngleRead(QEI_TypeDef QEIx){
+
+	const int ppr = 12;
+	pwenc.pulse = QEIRead(QEIx);
+	pwenc.delta_angle = pwenc.pulse/ppr * 360;
+	if(LS_shagai){
+		pwenc.angle = 0;
+	}else{
+		pwenc.angle += pwenc.delta_angle;
+	}
+
+	return pwenc.angle;
+}
+
+void no_shagai(int32_t angle, BDC_t* bdc, int32_t pwm){		//execute first angle =  pwAngleRead(QEIx); in main.c while(1)
+	while(angle < horizontal_angle){						//measure the horizontal angle
+		WriteBDC(&bdc, pwm);
+	}
+	StopBDC(&bdc);
+}
+
+void take_shagai(int32_t angle, BDC_t* bdc, int32_t pwm){	//execute first angle =  pwAngleRead(QEIx); in main.c while(1)
+	while(angle > 0){
+		WriteBDC(&bdc, pwm);								//pwm must be in negative
+	}
+	StopBDC(&bdc);
+}
+
+void got_shagai(int32_t angle, BDC_t* bdc, int32_t pwm){	//execute first angle =  pwAngleRead(QEIx); in main.c while(1)
+	while(angle < shoot_angle){								//measure the shoot angle
+		WriteBDC(&bdc, pwm);
+	}
+	StopBDC(&bdc);
+}
+
 void var_init (void){
 
 	//Timer global variable
