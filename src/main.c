@@ -12,12 +12,33 @@ int main(void) {
 	var_init();
 
 	while (1) {
-		if(ps4.button==SELECT)
-		manual=1;
+		angle = pwAngleRead(QEIx);					//x can be 1, 4, 6
+		
+		if(jun = 4){
+			take_shagai(angle, &BDC1, );
+		}else if(jun < 4){
+			no_shagai(angle, &BDC1, );
+		}else{
+			got_shagai(angle, &BDC1, );
+		}
+		
+		if(ps4.button==CIRCLE && ps4.button!=SELECT){
+			manual = 0;
+			autoflag = 1;
+		}
+		
+		if(ps4.button!=CIRCLE && ps4.button==SELECT){
+			manual=1;
+			autoflag = 0;
+		}
 
 
 		while (manual) {
 			manual_mode();
+		}
+		
+		while(autoflag){
+			autoTask();
 		}
 	}
 	return 0;
