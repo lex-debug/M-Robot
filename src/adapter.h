@@ -124,6 +124,8 @@ int flag;
 int manual;
 int counter;                                      //global timer variable
 float speed;                                      //for manual control
+int jun;
+int32_t angle;
 
 union{
 	float data;
@@ -149,8 +151,8 @@ void CAN_PROCESS(void);
 void Initialize (void);
 void slave_rcv(unsigned char length, unsigned char *pdata);
 void PS4_rcv(unsigned char length, unsigned char *pdata);
-void manual_mode (void);
-void enq (void);
-void var_init (void);
+// void manual_mode (void);
+// void enq (void);
+// void var_init (void);
 
 #endif /* ADAPTER_H_ */
