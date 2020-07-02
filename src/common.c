@@ -93,7 +93,8 @@ void autoTask(void){
 	float point5[3][5]={
 			{5.0, x3, y3, 0.0, 0.0},
 			{5.0, x4, y4, 0.0, 0.0},
-			{5.0, x5, y5, 0.0, 0.0}
+			{5.0, x5, y5, 0.0, 0.0},
+			{5.0, x6, y6, 0.0, 0.0}
 	};
 
 	if(!ANA_receive && ppflag.flag1==0){
@@ -127,7 +128,9 @@ void autoTask(void){
 		case 4 :	RNSPPstart(point4, 2, &rns);
 					break;
 		case 5 :	RNSPPstart(point5, 3, &rns);
-					break;
+					RNSStop(&rns);
+						shootShagai_out;
+							break;
 		default :	break;
 	}
 
