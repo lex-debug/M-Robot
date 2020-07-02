@@ -85,6 +85,7 @@ void Initialize (void){
 // 	BDCInit(&BDC8, &(TIM5->CCR1), SHIFTREG, &(SR.cast[0]), Bit0, Bit1);
 	
 	ppflag.flags = 0x0000;
+	cylinderInit();
 
 }
 
