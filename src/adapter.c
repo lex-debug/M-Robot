@@ -79,10 +79,12 @@ void Initialize (void){
 	BDCInit(&BDC2, &(TIM3->CCR3), SHIFTREG, &(SR.cast[1]), Bit4, Bit5);
 	BDCInit(&BDC3, &(TIM9->CCR1), SHIFTREG, &(SR.cast[1]), Bit2, Bit3);
 	BDCInit(&BDC4, &(TIM9->CCR2), SHIFTREG, &(SR.cast[1]), Bit0, Bit1);
-	BDCInit(&BDC5, &(TIM5->CCR4), SHIFTREG, &(SR.cast[0]), Bit6, Bit7);
-	BDCInit(&BDC6, &(TIM5->CCR3), SHIFTREG, &(SR.cast[0]), Bit4, Bit5);
-	BDCInit(&BDC7, &(TIM5->CCR2), SHIFTREG, &(SR.cast[0]), Bit2, Bit3);
-	BDCInit(&BDC8, &(TIM5->CCR1), SHIFTREG, &(SR.cast[0]), Bit0, Bit1);
+// 	BDCInit(&BDC5, &(TIM5->CCR4), SHIFTREG, &(SR.cast[0]), Bit6, Bit7);
+// 	BDCInit(&BDC6, &(TIM5->CCR3), SHIFTREG, &(SR.cast[0]), Bit4, Bit5);
+// 	BDCInit(&BDC7, &(TIM5->CCR2), SHIFTREG, &(SR.cast[0]), Bit2, Bit3);
+// 	BDCInit(&BDC8, &(TIM5->CCR1), SHIFTREG, &(SR.cast[0]), Bit0, Bit1);
+	
+	ppflag.flags = 0x0000;
 
 }
 
