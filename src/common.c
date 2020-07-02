@@ -168,6 +168,12 @@ void got_shagai(int32_t angle, BDC_t* bdc, int32_t pwm){	//execute first angle =
 	StopBDC(&bdc);
 }
 
+void cylinderInit(void){
+	shootShagai_in;
+	shootFrisbee_in;
+	reloadFrisbee_in;
+}
+
 void var_init (void){
 
 	//Timer global variable
