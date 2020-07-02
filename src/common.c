@@ -74,8 +74,6 @@ void enq (void){
 
 void autoTask(void){
 
-	ppflag.flags = 0x0000;
-
 	float point1[2][5]={
 			{5.0, 0.0, 0.0, 0.0, 0.0},
 			{5.0, x, y, 0.0, 0.0}					//those points need to measure using robot, for now just leave it there
