@@ -55,6 +55,14 @@
 // #define shoot_out		SR.cast[1].bit7=1
 // #define shoot_in		SR.cast[1].bit7=0
 
+//cylinder
+#define shootShagai_out		SR.cast[0].bit0 = 1
+#define shootShagai_in		SR.cast[0].bit0 = 0
+#define shootFrisbee_out 	SR.cast[0].bit1 = 1
+#define shootFrisbee_in 	SR.cast[0].bit1 = 0
+#define reloadFrisbee_out	SR.cast[0].bit2 = 1
+#define reloadFrisbee_in	SR.cast[0].bit2 = 0
+
 #define InnerMotor(a)	WriteBDC(&BDC1,-a)
 #define OuterMotor(a)	WriteBDC(&BDC2,-a)
 
